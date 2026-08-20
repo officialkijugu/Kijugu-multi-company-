@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="sw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KIJUGU MULTI COMPANY — MVP</title>
+<style>
+:root{--green:#0b8f3c;--dark:#07120d;--gold:#f3bd32;--bg:#f3f6f4;--card:#fff;--muted:#6b756f;--red:#d64545}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#172019}
+button,input,select{font:inherit}button{cursor:pointer}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#06110b,#0b3c20)}
+.login-card{width:min(420px,100%);background:#fff;border-radius:24px;padding:28px;box-shadow:0 20px 60px #0006}
+.logo{width:70px;height:70px;border-radius:20px;background:var(--dark);color:var(--gold);display:grid;place-items:center;font-size:28px;font-weight:900;margin:auto}
+.brand{text-align:center;margin:12px 0 24px}.brand h1{margin:0;font-size:25px}.brand p{margin:5px;color:var(--muted)}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}input,select{width:100%;padding:13px;border:1px solid #dce3df;border-radius:12px;background:#fff}
+.primary{width:100%;border:0;border-radius:12px;padding:14px;background:var(--green);color:#fff;font-weight:800;margin-top:18px}
+.demo{text-align:center;color:var(--muted);font-size:12px;margin-top:12px}
+.app{display:none;min-height:100vh}.top{height:68px;background:#062014;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:5}.top b{color:var(--gold)}.top button{background:transparent;border:0;color:#fff;font-size:20px}
+.layout{display:flex}.side{width:230px;background:#0b1710;min-height:calc(100vh - 68px);padding:15px;position:sticky;top:68px}.side button{display:block;width:100%;text-align:left;background:transparent;border:0;color:#dce9e0;padding:13px;border-radius:10px;margin-bottom:4px}.side button.active,.side button:hover{background:#123a22;color:#fff}.content{padding:20px;max-width:1250px;width:100%;margin:auto}.page{display:none}.page.active{display:block}.head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:18px}.head h2{margin:0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:var(--card);border-radius:16px;padding:17px;box-shadow:0 4px 18px #0b201008;border:1px solid #e8eeea}.metric small{color:var(--muted)}.metric strong{display:block;font-size:24px;margin-top:8px}.green{color:var(--green)}.gold{color:#a77a00}.red{color:var(--red)}.actions{display:flex;flex-wrap:wrap;gap:10px}.btn{border:0;padding:11px 14px;border-radius:10px;font-weight:700}.btn.green{background:var(--green);color:#fff}.btn.light{background:#e9f1ec;color:#14552d}.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:12px;border-bottom:1px solid #edf1ee;font-size:14px}.pill{padding:5px 9px;border-radius:99px;font-size:11px;font-weight:800;background:#e8f7ec;color:#167238}.pill.red{background:#ffe8e8}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.toast{position:fixed;right:16px;bottom:16px;background:#07120d;color:#fff;padding:13px 16px;border-radius:12px;display:none;z-index:10}
+@media(max-width:800px){.side{width:70px;padding:8px}.side button{font-size:0;text-align:center}.side button:before{font-size:20px}.side button[data-p="dashboard"]:before{content:"🏠"}.side button[data-p="customers"]:before{content:"👥"}.side button[data-p="loans"]:before{content:"💰"}.side button[data-p="payments"]:before{content:"💳"}.side button[data-p="reports"]:before{content:"📊"}.grid{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:1fr}.content{padding:14px}.table{min-width:650px}.scroll{overflow:auto}.head{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<section id="login" class="login">
+  <div class="login-card">
+    <div class="logo">K</div>
+    <div class="brand"><h1>KIJUGU MULTI COMPANY</h1><p>Loan & Collection Management</p></div>
+    <label>Company</label><select id="company"><option>ABC Finance Company</option><option>Demo Microfinance</option></select>
+    <label>Username</label><input id="user" value="admin">
+    <label>Password</label><input id="pass" type="password" value="1234">
+    <button class="primary" onclick="login()">LOGIN</button>
+    <div class="demo">Demo: admin / 1234</div>
+  </div>
+</section>
+
+<section id="app" class="app">
+<header class="top"><div><b>KIJUGU</b> MULTI COMPANY</div><div>ABC Finance Company &nbsp; 👤 Admin</div></header>
+<div class="layout">
+<nav class="side">
+<button class="active" data-p="dashboard" onclick="show('dashboard',this)">Dashboard</button>
+<button data-p="customers" onclick="show('customers',this)">Customers</button>
+<button data-p="loans" onclick="show('loans',this)">Loans</button>
+<button data-p="payments" onclick="show('payments',this)">Payments</button>
+<button data-p="reports" onclick="show('reports',this)">Reports</button>
+</nav>
+<main class="content">
+<section id="dashboard" class="page active">
+<div class="head"><div><h2>Dashboard</h2><small>Good morning, Admin 👋</small></div><button class="btn green" onclick="show('customers')">+ Customer</button></div>
+<div class="grid">
+<div class="card metric"><small>Total Loans</small><strong class="green">TSh 25.4M</strong></div>
+<div class="card metric"><small>Total Collections</small><strong>TSh 18.2M</strong></div>
+<div class="card metric"><small>Customers</small><strong class="gold">1,248</strong></div>
+<div class="card metric"><small>Overdue</small><strong class="red">TSh 2.1M</strong></div>
+</div>
+<br><div class="card"><h3>Quick Actions</h3><div class="actions">
+<button class="btn light" onclick="show('customers')">👥 Customers</button>
+<button class="btn light" onclick="show('loans')">💰 New Loan</button>
+<button class="btn light" onclick="show('payments')">💳 Payment</button>
+<button class="btn light" onclick="receipt()">🧾 Receipt</button>
+</div></div><br>
+<div class="card"><h3>Recent Payments</h3><div class="scroll"><table class="table"><tr><th>Customer</th><th>Amount</th><th>Status</th></tr>
+<tr><td>John Michael</td><td>TSh 100,000</td><td><span class="pill">Paid</span></td></tr>
+<tr><td>Asha Mwita</td><td>TSh 80,000</td><td><span class="pill">Paid</span></td></tr>
+<tr><td>David John</td><td>TSh 150,000</td><td><span class="pill">Paid</span></td></tr></table></div></div>
+</section>
+
+<section id="customers" class="page">
+<div class="head"><h2>Customers</h2><button class="btn green" onclick="addCustomer()">+ Add Customer</button></div>
+<div class="card"><input placeholder="Search customer..." oninput="filterCustomers(this.value)"></div><br>
+<div class="card scroll"><table class="table" id="customerTable"><tr><th>Name</th><th>Phone</th><th>Status</th><th>Action</th></tr>
+<tr><td>John Michael</td><td>0712 345 678</td><td><span class="pill">Active</span></td><td><button class="btn light" onclick="profile('John Michael')">Profile</button></td></tr>
+<tr><td>Asha Mwita</td><td>0755 123 456</td><td><span class="pill">Active</span></td><td><button class="btn light" onclick="profile('Asha Mwita')">Profile</button></td></tr>
+<tr><td>David John</td><td>0788 456 789</td><td><span class="pill red">Overdue</span></td><td><button class="btn light" onclick="profile('David John')">Profile</button></td></tr>
+</table></div></section>
+
+<section id="loans" class="page">
+<div class="head"><h2>New Loan</h2></div>
+<div class="card"><div class="formgrid">
+<div><label>Customer</label><select id="loanCustomer"><option>John Michael</option><option>Asha Mwita</option><option>David John</option></select></div>
+<div><label>Loan Amount (TSh)</label><input id="loanAmount" type="number" value="1000000"></div>
+<div><label>Interest Rate (%)</label><input id="rate" type="number" value="10"></div>
+<div><label>Repayment Period</label><input id="period" type="number" value="10"></div>
+<div><label>Frequency</label><select id="freq"><option>Monthly</option><option>Weekly</option><option>Daily</option></select></div>
+<div><label>First Payment Date</label><input id="date" type="date" value="2026-09-30"></div>
+</div>
+<button class="btn green" onclick="calculateLoan()">Calculate & Review</button>
+<div id="loanResult" style="margin-top:16px"></div></div></section>
+
+<section id="payments" class="page">
+<div class="head"><h2>New Payment</h2></div>
+<div class="card"><div class="formgrid">
+<div><label>Loan</label><select><option>LN-000125 — John Michael</option><option>LN-000126 — Asha Mwita</option></select></div>
+<div><label>Amount (TSh)</label><input id="payAmount" type="number" value="100000"></div>
+<div><label>Payment Method</label><select><option>Cash</option><option>M-Pesa</option><option>Airtel Money</option><option>Mixx by Yas</option><option>HaloPesa</option><option>Bank</option></select></div>
+<div><label>Reference</label><input placeholder="Transaction reference"></div>
+</div><button class="btn green" onclick="recordPayment()">Confirm Payment</button></div><br>
+<div class="card"><h3>Payment History</h3><div id="paymentHistory">No new payments in this demo session.</div></div></section>
+
+<section id="reports" class="page">
+<div class="head"><h2>Reports & Analytics</h2><button class="btn green" onclick="alert('Demo: report export itaunganishwa kwenye production version.')">Export</button></div>
+<div class="grid"><div class="card metric"><small>Collections</small><strong class="green">TSh 18.2M</strong></div><div class="card metric"><small>Disbursements</small><strong>TSh 12.5M</strong></div><div class="card metric"><small>Outstanding</small><strong>TSh 45M</strong></div><div class="card metric"><small>PAR</small><strong class="red">7.8%</strong></div></div><br>
+<div class="card"><h3>Portfolio Overview</h3><p>🟢 Performing &nbsp; 🟡 Watch List &nbsp; 🔴 Overdue</p><div style="height:180px;background:linear-gradient(180deg,#eaf7ee,#fff);border-radius:12px;display:grid;place-items:center;color:#17733b;font-weight:800">Analytics chart — Production version</div></div></section>
+</main></div></section>
+<div id="toast" class="toast"></div>
+<script>
+function login(){document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';toast('Karibu KIJUGU MULTI COMPANY');}
+function show(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.side button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');}
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',2200)}
+function calculateLoan(){let p=+document.getElementById('loanAmount').value||0,r=+document.getElementById('rate').value||0,n=+document.getElementById('period').value||1;let interest=p*r/100,total=p+interest,inst=total/n;document.getElementById('loanResult').innerHTML=`<div class="card"><b>Loan Calculation</b><p>Principal: <strong>TSh ${p.toLocaleString()}</strong></p><p>Interest: <strong>TSh ${interest.toLocaleString()}</strong></p><p>Total: <strong>TSh ${total.toLocaleString()}</strong></p><p>Installment: <strong class="green">TSh ${inst.toLocaleString()}</strong></p><button class="btn green" onclick="toast('Loan application imewekwa Pending Approval')">Submit Application</button></div>`}
+function recordPayment(){let a=+(document.getElementById('payAmount').value||0);document.getElementById('paymentHistory').innerHTML=`<p>🟢 John Michael — <b>TSh ${a.toLocaleString()}</b> — Confirmed</p><button class="btn light" onclick="receipt()">View Receipt</button>`;toast('Payment confirmed — receipt generated');}
+function receipt(){alert('RECEIPT\\n\\nKIJUGU MULTI COMPANY\\nABC FINANCE COMPANY\\nReceipt: RC-000256\\nCustomer: John Michael\\nAmount Paid: TSh 100,000\\nStatus: PAID');}
+function profile(n){alert('CUSTOMER PROFILE\\n\\n'+n+'\\nActive Loans: 2\\nTotal Borrowed: TSh 3,000,000\\nTotal Paid: TSh 2,050,000\\nOutstanding: TSh 950,000');}
+function addCustomer(){let n=prompt('Jina kamili la mteja:');if(n){toast(n+' ameongezwa (demo)');}}
+function filterCustomers(q){document.querySelectorAll('#customerTable tr:not(:first-child)').forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q.toLowerCase())?'':'none')}
+</script>
+</body></html>
